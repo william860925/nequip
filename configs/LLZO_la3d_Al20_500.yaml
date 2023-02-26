@@ -31,7 +31,7 @@ device: cuda                                                                    
 #  - RescaleEnergyEtc           # wrap the entire model in the appropriate global rescaling of the energy, forces, etc.
 #   ^ global rescaling blocks must always go last!
 
-r_max: 4                                                                        # cutoff radius in length units, here Angstrom, this is an important hyperparamter to scan
+r_max: 7                                                                        # cutoff radius in length units, here Angstrom, this is an important hyperparamter to scan
 num_layers: 4                                                                     # number of interaction blocks, we find 3-5 to work best
 
 l_max: 1                                                                          # the maximum irrep order (rotation order) for the network's features, l=1 is a good default, l=2 is more accurate but slower
@@ -249,23 +249,17 @@ loss_coeffs:                                                                    
 
 # output metrics
 metrics_components:
-  - - forces                               # key 
-    - mae                                  # "rmse" or "mae"
   - - forces
     - rmse
-  - - forces
-    - mae
-    - PerSpecies: True                     # if true, per species contribution is counted separately
-      report_per_component: False          # if true, statistics on each component (i.e. fx, fy, fz) will be counted separately
   - - forces                                
     - rmse                                  
-    - PerSpecies: True                     
-      report_per_component: False    
+    - PerSpecies: True                   # if true, statistics on each component (i.e. fx, fy, fz) will be counted separately    
+      report_per_component: False      
   - - total_energy
-    - mae    
+    - rmse  
   - - total_energy
-    - mae
-    - PerAtom: True                        # if true, energy is normalized by the number of atoms
+    - rmse
+    - PerAtom: True                       # if true, energy is normalized by the number of atoms
 
 # optimizer, may be any optimizer defined in torch.optim
 # the name `optimizer_name`is case sensitive
