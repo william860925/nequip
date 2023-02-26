@@ -99,7 +99,7 @@ use_sc: true                                                                    
 # alternatively, you can read directly from a VASP OUTCAR file (this will only read that single OUTCAR)
 # # for VASP OUTCAR, the yaml input should be
 dataset: ase
-dataset_file_name: ./tmp/OUTCAR
+dataset_file_name: ./OUTCAR
 ase_args:
   format: vasp-out
 # important VASP note: the ase vasp parser stores the potential energy to "free_energy" instead of "energy".
